@@ -12,12 +12,9 @@ class ProductController {
             return res.status(500).json({ error });
         }
     }
+
     async findAll (req: Request, res: Response) {
         try {
-            // if (req.query) {
-            //     const resultname = await ProductSchema.find(req.query);
-            //     return res.status(200).json(resultname);
-            // };
             const products = await ProductService.findAll();
             return res.status(200).send(products);
 
@@ -25,6 +22,17 @@ class ProductController {
             return res.status(400).json({ error });
         }
     }
+
+    async findById (req: Request, res: Response) {
+        try {
+          const id = req.params.id;
+          const resultId = await ProductService.findById(id);
+          return res.status(201).json(resultId);
+        } catch (error) {
+          return res.status(500).json({ error });
+        }
+    }
+
 }
 
 export default new ProductController();

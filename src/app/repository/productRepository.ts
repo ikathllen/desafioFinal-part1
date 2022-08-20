@@ -5,6 +5,7 @@ class ProductRepository {
     async create (payload: ProductInterface): Promise< ProductInterfaceResponse> {
         return Product.create(payload);
     }
+
     async findAll (): Promise<ProductInterfaceResponse[]> {
         const myCustomLabels = {
             docs: 'products',
@@ -23,7 +24,11 @@ class ProductRepository {
         };
         const products = await Product.paginate({}, options);
         return products;
-      }
+    }
+
+    async findById (id: String): Promise<ProductInterfaceResponse | null> {
+        return Product.findById(id);
+    }
 }
 
 export default new ProductRepository();

@@ -33,6 +33,17 @@ class ProductController {
         }
     }
 
+    async updatePut (req: Request, res: Response) {
+        try {
+          const id = req.params.id;
+          const { title, description, department, brand, price, qtd_stock, bar_codes } = req.body;
+          const resultPut = await ProductService.updatePut(id, { title, description, department, brand, price, qtd_stock, bar_codes });
+          return res.status(201).json(resultPut);
+        } catch (error) {
+          return res.status(500).json({ error });
+        }
+    }
+
 }
 
 export default new ProductController();

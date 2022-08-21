@@ -29,6 +29,10 @@ class ProductRepository {
     async findById (id: String): Promise<ProductInterfaceResponse | null> {
         return Product.findById(id);
     }
+
+    async updatePut (id: String, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
+        return Product.findByIdAndUpdate(id, payload);
+    }
 }
 
 export default new ProductRepository();

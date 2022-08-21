@@ -4,19 +4,25 @@ import IdExistProduct from '../validation/IdExistProductValidation';
 
 class ProductService {
     async create (payload: ProductInterface): Promise<ProductInterfaceResponse> {
-        const result = await ProductRepository.create(payload);
-        return result;
+        const resultPost = await ProductRepository.create(payload);
+        return resultPost;
     }
 
     async findAll (): Promise<ProductInterfaceResponse[]> {
-        const result = await ProductRepository.findAll();
-        return result;
+        const resultGet = await ProductRepository.findAll();
+        return resultGet;
     }
 
     async findById (id: String): Promise<ProductInterfaceResponse | null> {
-        const result = await ProductRepository.findById(id);
-        if (result == null) throw new IdExistProduct();
-        return result;
+        const resultGetById = await ProductRepository.findById(id);
+        if (resultGetById == null) throw new IdExistProduct();
+        return resultGetById;
+    }
+
+    async updatePut (id: String, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
+        const resultPut = await ProductRepository.updatePut(id, payload);
+        if (resultPut == null) throw new IdExistProduct();
+        return resultPut;
     }
 }
 

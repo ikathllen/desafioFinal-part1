@@ -24,6 +24,12 @@ class ProductService {
         if (resultPut == null) throw new IdExistProduct();
         return resultPut;
     }
+
+    async delete (id: String): Promise<ProductInterfaceResponse | null> {
+        const resultDelete = await ProductRepository.delete(id);
+        if (resultDelete == null) throw new IdExistProduct();
+        return resultDelete;
+      }
 }
 
 export default new ProductService();

@@ -33,6 +33,11 @@ class ProductRepository {
     async updatePut (id: String, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
         return Product.findByIdAndUpdate(id, payload);
     }
+
+    async delete (id: String): Promise<ProductInterfaceResponse | null> {
+        return Product.findByIdAndDelete(id);
+    }
+    
 }
 
 export default new ProductRepository();

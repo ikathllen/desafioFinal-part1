@@ -1,7 +1,7 @@
 import { Types } from 'mongoose';
 import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
-import InvalidProduct from './errorFindByIdProductValidation';
+import InvalidProduct from './error/errorFindByIdProductValidation';
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     try {

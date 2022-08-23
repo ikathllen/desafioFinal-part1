@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 import { Request, Response, NextFunction } from 'express';
-import IdExistProduct from './IdExistProductValidation';
+import IdExistProduct from './error/IdExistProductValidation';
 
 export default async (req: Request, res: Response, next: NextFunction) => {
     try {

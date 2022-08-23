@@ -24,6 +24,16 @@ class ProductController {
         }
     }
 
+    async findByStock (req: Request, res: Response) {
+        try {
+            const products = await ProductService.findByStock();
+            return res.status(200).send(products);
+
+        } catch (error) {
+            return res.status(400).json({ error });
+        }
+    }
+
     async findById (req: Request, res: Response) {
         try {
             const id = req.params.id;

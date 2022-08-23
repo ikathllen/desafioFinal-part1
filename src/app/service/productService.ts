@@ -1,6 +1,7 @@
 import { ProductInterface, ProductInterfaceResponse } from '../interface/productInterface';
 import ProductRepository from '../repository/productRepository';
-import IdExistProduct from '../validation/IdExistProductValidation';
+import Product from '../schema/productSchema';
+import IdExistProduct from '../validation/error/IdExistProductValidation';
 
 class ProductService {
     async create (payload: ProductInterface): Promise<ProductInterfaceResponse> {
@@ -11,6 +12,11 @@ class ProductService {
     async findAll (): Promise<ProductInterfaceResponse[]> {
         const resultGet = await ProductRepository.findAll();
         return resultGet;
+    }
+
+    async findByStock (): Promise<ProductInterfaceResponse[]> {
+        const resultGetByStock = Product.find({ qtd_stock: { $lt: 100 } });
+        return resultGetByStock;
     }
 
     async findById (id: String): Promise<ProductInterfaceResponse | null> {

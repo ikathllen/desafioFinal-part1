@@ -19,10 +19,16 @@ class ProductService {
         return resultGetById;
     }
 
-    async updatePut (id: String, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
-        const resultPut = await ProductRepository.updatePut(id, payload);
+    async update (id: String, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
+        const resultPut = await ProductRepository.update(id, payload);
         if (resultPut == null) throw new IdExistProduct();
         return resultPut;
+    }
+
+    async updateOne (id: String, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
+        const resultPatch = await ProductRepository.updateOne(id, payload);
+        if (resultPatch == null) throw new IdExistProduct();
+        return resultPatch;
     }
 
     async delete (id: String): Promise<ProductInterfaceResponse | null> {

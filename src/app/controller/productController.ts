@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import ProductService from '../service/productService'
 import ProductSchema from '../schema/productSchema';
+import productRepository from '../repository/productRepository';
 
 class ProductController {
     async create (req: Request, res: Response) {
@@ -33,15 +34,22 @@ class ProductController {
         }
     }
 
-    async updatePut (req: Request, res: Response) {
+    async update (req: Request, res: Response) {
         try {
             const id = req.params.id;
             const { title, description, department, brand, price, qtd_stock, bar_codes } = req.body;
-            const resultPut = await ProductService.updatePut(id, { title, description, department, brand, price, qtd_stock, bar_codes });
+            const resultPut = await ProductService.update(id, { title, description, department, brand, price, qtd_stock, bar_codes });
             return res.status(201).json(resultPut);
         } catch (error) {
             return res.status(500).json({ error });
         }
+    }
+
+    async updateOne (req: Request, res: Response) {
+        const id = req.params.id;
+        const { title, description, department, brand, price, qtd_stock, bar_codes } = req.body;
+        const resultPatch = await ProductService.update(id, { title, description, department, brand, price, qtd_stock, bar_codes });
+        return (resultPatch);
     }
 
     async delete (req: Request, res: Response) {

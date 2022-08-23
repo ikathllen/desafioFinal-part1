@@ -12,8 +12,7 @@ const schema = new Schema<ProductInterface>({
   price: { type: Number, required: true },
   qtd_stock: { type: Number, required: true },
   bar_codes: { type: String, unique: true, required: true },
-
-});
+}, { timestamps: {createdAt: 'created_at', updatedAt: 'updated_at'} } );
 
 schema.plugin(mongoosePaginate);
 const Product = mongoose.model('product', schema);

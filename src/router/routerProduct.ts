@@ -5,10 +5,13 @@ import deleteProductValidation from '../app/validation/deleteProductValidation';
 import findByIdProductValidation from '../app/validation/findByIdProductValidation';
 import updateOneProductValidation from '../app/validation/updateOneProductValidation';
 import updateProductValidation from '../app/validation/updateProductValidation'
+import multer from 'multer';
 
+const multerConfig = multer();
 const router = Router();
 
 router.post('/api/v1/product', createProductValidation, productController.create);
+router.post('/api/v1/product/csv', multerConfig.single("file"), productController.createByCSV);
 router.get('/api/v1/product', productController.findAll);
 router.get('/api/v1/product/low_stock', productController.findByStock);
 router.get('/api/v1/product/:id', findByIdProductValidation, productController.findById);

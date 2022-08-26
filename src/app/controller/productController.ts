@@ -2,6 +2,12 @@ import { Request, Response } from 'express';
 import ProductService from '../service/productService'
 import ProductSchema from '../schema/productSchema';
 import productRepository from '../repository/productRepository';
+import multer from 'multer';
+import { Readable } from "stream";
+import readLine from 'readline';
+import { ProductInterface } from '../interface/productInterface';
+
+const multerConfig = multer();
 
 class ProductController {
     async create (req: Request, res: Response) {
@@ -12,6 +18,46 @@ class ProductController {
         } catch (error) {
             return res.status(500).json({ error });
         }
+    }
+
+    async createByCSV (req: Request, res: Response) {
+        try{ 
+            const { file } = req;
+
+            if (file !== undefined) { 
+                const { buffer } = file;
+                const products: ProductInterface[] = [];
+
+                const readableFile = new Readable();
+                readableFile.push(buffer);
+                readableFile.push(null);
+                
+                const productLine = readLine.createInterface({
+                    input: readableFile
+                })
+
+                for await (let line of productLine){
+                    const lineSplit = line.split(",");
+
+                    products.push({
+                        title: lineSplit[0],
+                        description: lineSplit[1],
+                        department: lineSplit[2],
+                        brand: lineSplit[3],
+                        price: Number(lineSplit[4]),
+                        qtd_stock: Number(lineSplit[5]),
+                        bar_codes: lineSplit[6]
+                    });
+                }
+
+                for await (let {title, description, department, brand, price, qtd_stock, bar_codes} of products){
+                    await ProductService.create({ title, description, department, brand, price, qtd_stock, bar_codes });
+                }
+                return res.status(201).json(products);
+            }
+        } catch (error) {
+            return res.status(400).json({ error });
+        } 
     }
 
     async findAll (req: Request, res: Response) {

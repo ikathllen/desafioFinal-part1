@@ -50,7 +50,7 @@ Primeira parte do desafio final do programa de bolsa (NodeJS)
   - **POST**: http://localhost:3000/api/v1/product/csv
 
 # How to enter data
-- For POST normal:
+- **For POST normal**:
       <br>title: 'xxxxxxxxxxxx',
       <br>description: 'xxxxxxxxxxxx',
       <br>department: 'xxxxxxxxxxxx',
@@ -59,7 +59,7 @@ Primeira parte do desafio final do programa de bolsa (NodeJS)
       <br>qtd_stock: 1111,
       <br>bar_codes: 'xxxxxxxxxxxxx'
       
-- For POST with CSV:
+- **For POST with CSV**:
       <br>1 - Create _Multipart Form_ with name **file**;
       <br>2 - Add CSV file;
       <br>3 - Important the order must follow the pattern: title / description / department / brand / price / qtd_stock / bar_codes;

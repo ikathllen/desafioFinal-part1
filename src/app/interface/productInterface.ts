@@ -22,5 +22,4 @@ export interface ProductInterfaceResponse {
     qtd_stock: number;
     stock_control_enabled: boolean;
     bar_codes: string;
-
 }

@@ -2,12 +2,10 @@ import { Request, Response } from 'express';
 import ProductService from '../service/productService'
 import ProductSchema from '../schema/productSchema';
 import productRepository from '../repository/productRepository';
-import multer from 'multer';
 import { Readable } from "stream";
 import readLine from 'readline';
-import { ProductInterface } from '../interface/productInterface';
+import { ProductInterface, ProductInterfaceResponse } from '../interface/productInterface';
 
-const multerConfig = multer();
 
 class ProductController {
     async create (req: Request, res: Response) {
@@ -62,8 +60,9 @@ class ProductController {
 
     async findAll (req: Request, res: Response) {
         try {
-            const products = await ProductService.findAll();
-            return res.status(200).send(products);
+            // const products: ProductInterfaceResponse [] = await ProductSchema.find(req.query) || await ProductService.findAll();
+            const products: ProductInterfaceResponse [] = await ProductService.findAll();
+            return res.status(200).json(products);
 
         } catch (error) {
             return res.status(400).json({ error });

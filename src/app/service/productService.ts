@@ -15,8 +15,8 @@ class ProductService {
     }
 
     async findByStock (): Promise<ProductInterfaceResponse[]> {
-        const resultGetByStock = Product.find({ qtd_stock: { $lt: 1000 } });
-        return resultGetByStock.sort();
+        const resultGetByStock = Product.find({ qtd_stock: { $lt: 100 } });
+        return resultGetByStock.sort({qtd_stock: 1}).limit(50);
     }
 
     async findById (id: String): Promise<ProductInterfaceResponse | null> {

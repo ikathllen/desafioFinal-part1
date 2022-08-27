@@ -15,34 +15,32 @@ class ProductRepository {
             hasPrevPage: false,
             hasNextPage: false,
             prevPage: false,
-            nextPage: false
+            nextPage: false,
         };
         const options = {
             page: 1,
             limit: 100,
-            customLabels: myCustomLabels
+            customLabels: myCustomLabels,
         };
         const products = await Product.paginate({}, options);
         return products;
     }
 
-    async findById (id: String): Promise<ProductInterfaceResponse | null> {
+    async findById (id: string): Promise<ProductInterfaceResponse | null> {
         return Product.findById(id);
     }
 
-    async update (id: String, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
+    async update (id: string, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
         return Product.findByIdAndUpdate(id, payload);
     }
 
-    async updateOne (id: String, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
+    async updateOne (id: string, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
         return Product.findByIdAndUpdate(id, payload);
     }
-    
 
-    async delete (id: String): Promise<ProductInterfaceResponse | null> {
+    async delete (id: string): Promise<ProductInterfaceResponse | null> {
         return Product.findByIdAndDelete(id);
     }
-    
 }
 
 export default new ProductRepository();

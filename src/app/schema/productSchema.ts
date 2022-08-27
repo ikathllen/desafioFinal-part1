@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { ProductInterface } from '../interface/productInterface'
+import { ProductInterface } from '../interface/productInterface';
 
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');

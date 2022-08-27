@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import ProductService from '../service/productService'
-import ProductSchema from '../schema/productSchema';
-import productRepository from '../repository/productRepository';
-import { Readable } from "stream";
+import ProductService from '../service/productService';
+//import ProductSchema from '../schema/productSchema';
+//import productRepository from '../repository/productRepository';
+import { Readable } from 'stream';
 import readLine from 'readline';
 import { ProductInterface, ProductInterfaceResponse } from '../interface/productInterface';
 
@@ -19,23 +19,23 @@ class ProductController {
     }
 
     async createByCSV (req: Request, res: Response) {
-        try{ 
+        try{
             const { file } = req;
 
-            if (file !== undefined) { 
+            if (file !== undefined) {
                 const { buffer } = file;
                 const products: ProductInterface[] = [];
 
                 const readableFile = new Readable();
                 readableFile.push(buffer);
                 readableFile.push(null);
-                
-                const productLine = readLine.createInterface({
-                    input: readableFile
-                })
 
-                for await (let line of productLine){
-                    const lineSplit = line.split(",");
+                const productLine = readLine.createInterface({
+                    input: readableFile,
+                });
+
+                for await (const line of productLine){
+                    const lineSplit = line.split(',');
 
                     products.push({
                         title: lineSplit[0],
@@ -44,18 +44,18 @@ class ProductController {
                         brand: lineSplit[3],
                         price: Number(lineSplit[4]),
                         qtd_stock: Number(lineSplit[5]),
-                        bar_codes: lineSplit[6]
+                        bar_codes: lineSplit[6],
                     });
                 }
 
-                for await (let {title, description, department, brand, price, qtd_stock, bar_codes} of products){
+                for await (const {title, description, department, brand, price, qtd_stock, bar_codes} of products){
                     await ProductService.create({ title, description, department, brand, price, qtd_stock, bar_codes });
                 }
                 return res.status(201).json(products);
             }
         } catch (error) {
             return res.status(400).json({ error });
-        } 
+        }
     }
 
     async findAll (req: Request, res: Response) {
@@ -104,7 +104,7 @@ class ProductController {
         const id = req.params.id;
         const { title, description, department, brand, price, qtd_stock, bar_codes } = req.body;
         const resultPatch = await ProductService.update(id, { title, description, department, brand, price, qtd_stock, bar_codes });
-        return (resultPatch);
+        return res.status(201).json(resultPatch);
     }
 
     async delete (req: Request, res: Response) {

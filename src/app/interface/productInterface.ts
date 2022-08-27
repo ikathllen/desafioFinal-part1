@@ -9,7 +9,6 @@ export interface ProductInterface {
     price: number;
     qtd_stock: number;
     bar_codes: string;
-    
 }
 
 export interface ProductInterfaceResponse {

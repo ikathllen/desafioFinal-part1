@@ -19,27 +19,35 @@ class ProductService {
         return resultGetByStock.sort({qtd_stock: 1}).limit(50);
     }
 
-    async findById (id: String): Promise<ProductInterfaceResponse | null> {
+    async findById (id: string): Promise<ProductInterfaceResponse | null> {
         const resultGetById = await ProductRepository.findById(id);
-        if (resultGetById == null) throw new IdExistProduct();
+        if (resultGetById === null) {
+            throw new IdExistProduct();
+        }
         return resultGetById;
     }
 
-    async update (id: String, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
+    async update (id: string, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
         const resultPut = await ProductRepository.update(id, payload);
-        if (resultPut == null) throw new IdExistProduct();
+        if (resultPut === null) {
+            throw new IdExistProduct();
+        }
         return resultPut;
     }
 
-    async updateOne (id: String, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
+    async updateOne (id: string, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
         const resultPatch = await ProductRepository.updateOne(id, payload);
-        if (resultPatch == null) throw new IdExistProduct();
+        if (resultPatch === null) {
+            throw new IdExistProduct();
+        }
         return resultPatch;
     }
 
-    async delete (id: String): Promise<ProductInterfaceResponse | null> {
+    async delete (id: string): Promise<ProductInterfaceResponse | null> {
         const resultDelete = await ProductRepository.delete(id);
-        if (resultDelete == null) throw new IdExistProduct();
+        if (resultDelete === null) {
+            throw new IdExistProduct();
+        }
         return resultDelete;
       }
 }

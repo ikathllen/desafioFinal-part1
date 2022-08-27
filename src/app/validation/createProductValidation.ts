@@ -23,18 +23,17 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         }
       }),
       bar_codes: Joi.string().required().custom((value, helper) => {
-        if (value.length != 13) {
+        if (value.length !== 13) {
           return helper.error('invalid code: must be 13 digits.');
         } else {
           return true;
         }
-      })
+      }),
     });
-    
     const { error } = await schema.validate(req.body, { abortEarly: true });
-    if (error) throw error;
+    if (error) {throw error;}
     return next();
   } catch (error) {
     return res.status(400).json(error);
   }
-}; 
+};

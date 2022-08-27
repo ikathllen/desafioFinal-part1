@@ -7,7 +7,9 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
         const isValid = Types.ObjectId.isValid(id);
-        if (!isValid) throw new InvalidProduct();
+        if (!isValid) {
+            throw new InvalidProduct();
+        }
 
         const schema = Joi.object({
             title: Joi.string().required(),
@@ -29,16 +31,16 @@ export default async (req: Request, res: Response, next: NextFunction) => {
                 }
             }),
             bar_codes: Joi.string().required().custom((value, helper) => {
-                if (value.length != 13) {
+                if (value.length !== 13) {
                     return helper.error('invalid code: must be 13 digits.');
                 } else {
                     return true;
                 }
-            })
+            }),
         });
 
         const { error } = await schema.validate(req.body, { abortEarly: true });
-        if (error) throw error;
+        if (error) {throw error;}
         return next();
     } catch (error) {
         return res.status(400).json(error);

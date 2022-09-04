@@ -1,5 +1,6 @@
 import { ProductInterface, ProductInterfaceResponse } from '../interface/productInterface';
 import Product from '../schema/productSchema';
+import LoginSchema from '../schema/LoginSchema';
 
 class ProductRepository {
     async create (payload: ProductInterface): Promise< ProductInterfaceResponse> {

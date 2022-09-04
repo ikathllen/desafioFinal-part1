@@ -7,8 +7,12 @@ import updateOneProductValidation from '../app/validation/updateOneProductValida
 import updateProductValidation from '../app/validation/updateProductValidation';
 import multer from 'multer';
 
+const protect = require("../app/token/auth");
+
 const multerConfig = multer();
 const router = Router();
+
+router.use(protect);
 
 router.post('/api/v1/product', createProductValidation, productController.create);
 router.post('/api/v1/product/csv', multerConfig.single('file'), productController.createByCSV);

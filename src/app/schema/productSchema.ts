@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { ProductInterface } from '../interface/productInterface';
+import { ProductInterface} from '../interface/productInterface';
 
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
@@ -13,6 +13,7 @@ const schema = new Schema<ProductInterface>({
   qtd_stock: { type: Number, required: true },
   bar_codes: { type: String, unique: true, required: true },
 }, { timestamps: {createdAt: 'created_at', updatedAt: 'updated_at'} } );
+
 
 schema.plugin(mongoosePaginate);
 const Product = mongoose.model('product', schema);

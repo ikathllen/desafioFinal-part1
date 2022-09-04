@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import ProductService from '../service/productService';
-//import ProductSchema from '../schema/productSchema';
-//import productRepository from '../repository/productRepository';
 import { Readable } from 'stream';
 import readLine from 'readline';
 import { ProductInterface, ProductInterfaceResponse } from '../interface/productInterface';

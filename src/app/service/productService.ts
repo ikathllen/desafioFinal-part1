@@ -1,6 +1,7 @@
 import { ProductInterface, ProductInterfaceResponse } from '../interface/productInterface';
 import ProductRepository from '../repository/productRepository';
 import Product from '../schema/productSchema';
+import LoginSchema from '../schema/LoginSchema';
 import IdExistProduct from '../validation/error/IdExistProductValidation';
 
 class ProductService {

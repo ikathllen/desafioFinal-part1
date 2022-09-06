@@ -38,8 +38,6 @@ class UserController {
         const id = req.params.id;
         const user = await LoginSchema.findOne({ email });
 
-        const teste = String(user?.senha);
-
         const token =  jwt.sign({ id }, process.env.SECRET, {
             //05 dias
             expiresIn: "5d",

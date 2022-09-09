@@ -17,6 +17,7 @@ router.post('/api/v1/product/csv', protect, multerConfig.single('file'), product
 router.get('/api/v1/product', protect, productController.findAll);
 router.get('/api/v1/product/low_stock', protect, productController.findByStock);
 router.get('/api/v1/product/:id', protect, findByIdProductValidation, productController.findById);
+router.get('/api/v1/product/marketplace/:id', protect, findByIdProductValidation, productController.findByMapper);
 router.put('/api/v1/product/:id', protect, updateProductValidation, productController.update);
 router.patch('/api/v1/product/:id', protect, updateOneProductValidation, productController.updateOne);
 router.delete('/api/v1/product/:id', protect, deleteProductValidation, productController.delete);

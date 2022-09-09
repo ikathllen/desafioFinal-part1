@@ -4,6 +4,8 @@ import { Readable } from 'stream';
 import readLine from 'readline';
 import { ProductInterface, ProductInterfaceResponse } from '../interface/productInterface';
 
+const mapper = require('../mapper/mapper.json');
+const fs = require('fs');
 
 class ProductController {
     async create (req: Request, res: Response) {
@@ -85,6 +87,17 @@ class ProductController {
         } catch (error) {
             return res.status(500).json({ error });
         }
+    }
+
+    async findByMapper (req: Request, res: Response) {
+        try {
+            const id = req.params.id;
+            const resultId = await ProductService.findByMapper(id);
+            return res.status(201).json(resultId);
+        } catch (error) {
+            return res.status(500).json({ error });
+        }
+    
     }
 
     async update (req: Request, res: Response) {

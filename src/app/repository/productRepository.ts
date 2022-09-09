@@ -31,6 +31,10 @@ class ProductRepository {
         return Product.findById(id);
     }
 
+    async findByMapper (id: string): Promise<any> {
+        return Product.findByMapper(id);
+    }
+
     async update (id: string, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {
         return Product.findByIdAndUpdate(id, payload);
     }

@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@joi/date": "^2.1.0",
+    "@types/morgan": "^1.9.3",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
@@ -25,12 +26,18 @@
     "mongoose-paginate": "^5.0.3",
     "mongoose-paginate-ts": "^1.2.7",
     "mongoose-paginate-v2": "^1.7.0",
-    "multer": "^1.4.5-lts.1"
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "object-mapper": "^6.2.0",
+    "typeorm": "^0.3.9",
+    "winston": "^3.8.2",
+    "winston-mongodb": "^5.0.7"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/jquery": "^3.5.14",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/mongoose": "^5.11.97",
     "@types/multer": "^1.4.7",

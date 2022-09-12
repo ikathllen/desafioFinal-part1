@@ -37,6 +37,6 @@ app.use((req:any, res:any, next:any) => {
 const port = process.env.PORT || 3000 ;
 
 app.listen(port, () => {
-  console.log('info','Server on');
+  console.log('Server on');
   logger.log('info','Server on');
 }); 

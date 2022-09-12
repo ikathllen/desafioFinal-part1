@@ -9,7 +9,7 @@ var morgan  = require('morgan');
 
 app.use("/compassMart-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-app.get("/compassMart-terms", (request, response) => {
+app.get("/compassMart-terms", (request: any, response: any) => {
   return response.json({
   message: "Compass.uol terms of service",
   })
@@ -34,6 +34,9 @@ app.use((req:any, res:any, next:any) => {
   next();
 })
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000 ;
+
+app.listen(port, () => {
+  console.log('info','Server on');
   logger.log('info','Server on');
 }); 

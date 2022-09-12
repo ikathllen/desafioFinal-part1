@@ -3,6 +3,10 @@ import ProductRepository from '../repository/productRepository';
 import Product from '../schema/productSchema';
 import IdExistProduct from '../validation/error/IdExistProductValidation';
 
+let mapper = require('../mapper/mapper.json');
+const fs = require('fs');
+const objectMapper = require('object-mapper');
+
 class ProductService {
     async create (payload: ProductInterface): Promise<ProductInterfaceResponse> {
         const resultPost = await ProductRepository.create(payload);
@@ -25,6 +29,32 @@ class ProductService {
             throw new IdExistProduct();
         }
         return resultGetById;
+    }
+
+    async findByMapper (id: string): Promise<any> {
+        const obj = await ProductRepository.findByMapper(id), mapper = {};
+
+        console.log( obj )
+
+
+        function mapThat( obj: any, mapper: any ) {
+            Object.keys( obj ).forEach( function( key ) {
+                if ( typeof obj[ key ] === 'object' ) {
+                    // Se for um objeto, vamos recursivamente
+                    mapThat( obj[ key ], mapper );
+                }
+                else {
+                    // Se não for, adicione uma chave/valor
+                    mapper[ key.toLowerCase() ] = obj[ key ];
+                }
+            } );
+        }
+        mapThat( obj, mapper );
+        console.log( mapper );
+
+
+
+        return mapper;
     }
 
     async update (id: string, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {

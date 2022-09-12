@@ -34,9 +34,6 @@ class ProductService {
     async findByMapper (id: string): Promise<any> {
         const obj = await ProductRepository.findByMapper(id), mapper = {};
 
-        console.log( obj )
-
-
         function mapThat( obj: any, mapper: any ) {
             Object.keys( obj ).forEach( function( key ) {
                 if ( typeof obj[ key ] === 'object' ) {
@@ -52,9 +49,7 @@ class ProductService {
         mapThat( obj, mapper );
         console.log( mapper );
 
-
-
-        return mapper;
+        return obj;
     }
 
     async update (id: string, payload: ProductInterface): Promise<ProductInterfaceResponse | null> {

@@ -7,9 +7,9 @@ const logger = require("./Middleware/logger");
 var morgan  = require('morgan');
 
 
-app.use("/compassMart-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+app.use("/api/v1/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
-app.get("/compassMart-terms", (request: any, response: any) => {
+app.get("/api/v1/compassMart-terms", (request: any, response: any) => {
   return response.json({
   message: "Compass.uol terms of service",
   })

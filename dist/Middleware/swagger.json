@@ -1,0 +1,457 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "compassMart ",
+        "description": "API developed for the Compass.uol scholarship program",
+        "termsOfService": "http://localhost:3000/compassMart-terms",
+        "contact": {
+            "email": "fablena.dias.pb@compasso.com.br"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/api/v1",
+            "description": "API test"
+        }
+    ],
+    "paths": {
+        "/product": {
+            "post": {
+                "summary": "Product registration.",
+                "description": "Route is responsible for registering a new product",
+                "tags": ["Products"],
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schema/Product"
+                            },
+                            "examples": {
+                                "product": {
+                                    "value": {
+                                        "title": "Azeites, Óleos e Vinagres",
+                                        "description": "Óleo de Soja Soya Garrafa 900ml",
+                                        "department": "Mercearia",
+                                        "brand": "Soya",
+                                        "price": 9.49,
+                                        "qtd_stock": 30137,
+                                        "bar_codes": "7891107101621"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Not authorized"
+                    },
+                    "400": {
+                        "description": "Product already exists"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schema/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "List all products",
+                "description": "Route is responsible for list all products",
+                "tags": ["Products"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schema/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/{id}": {
+            "get": {
+                "summary": "List product by ID",
+                "description": "Route is responsible for list product by ID",
+                "tags": ["Products"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID for the search",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schema/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update product",
+                "description": "Route is responsible for update product",
+                "tags": ["Products"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID for the search",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schema/Product"
+                            },
+                            "examples": {
+                                "product": {
+                                    "value": {
+                                        "title": "Azeites, Óleos e Vinagres",
+                                        "description": "Óleo de Soja Soya Garrafa 900ml",
+                                        "department": "Mercearia",
+                                        "brand": "Soya",
+                                        "price": 9.49,
+                                        "qtd_stock": 300,
+                                        "bar_codes": "7891107101621"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Not authorized"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schema/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update product",
+                "description": "Route is responsible for update product",
+                "tags": ["Products"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID for the search",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schema/Product"
+                            },
+                            "examples": {
+                                "product": {
+                                    "value": {
+                                        "price": 10.49
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Not authorized"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schema/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete product by ID",
+                "description": "Route is responsible for delete product by ID",
+                "tags": ["Products"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID for the search",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schema/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/low_stock": {
+            "get": {
+                "summary": "List product by low stock",
+                "description": "Route is responsible for list product by low stock",
+                "tags": ["Products"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schema/Product"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/marketplace/{id}": {
+            "get": {
+                "summary": "List marketplace by ID",
+                "description": "Route is responsible for list marketplace by ID",
+                "tags": ["Products"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product ID for the search",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schema/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user": {
+            "post": {
+                "summary": "User registration.",
+                "description": "Route is responsible for registering a new user",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schema/User"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "email": "fablex@dias.com.br",
+                                        "senha": "1234abc"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "User already exists"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schema/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "List all users",
+                "description": "Route is responsible for list all users",
+                "tags": ["Users"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schema/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "delete": {
+                "summary": "Delete user by ID",
+                "description": "Route is responsible for delete user by ID",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID for the search",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schema/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/authenticate": {
+            "post": {
+                "summary": "User authenticate.",
+                "description": "Route is responsible for user authenticate.",
+                "tags": ["Authenticate"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schema/User"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "email": "fablex@dias.com.br",
+                                        "senha": "1234abc"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Datas invalid"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schema/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schema": {
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "title": { "type": "string" },
+                    "description": { "type": "string" },
+                    "department": { "type": "string" },
+                    "brand": { "type": "string" },
+                    "price": { "type": "number" },
+                    "qtd_stock": { "type": "number" },
+                    "bar_codes": { "type": "string" }
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "email": { "type": "string" },
+                    "senha": { "type": "string" }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

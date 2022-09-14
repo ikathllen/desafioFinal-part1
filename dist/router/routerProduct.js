@@ -1,0 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const productController_1 = __importDefault(require("../app/controller/productController"));
+const createProductValidation_1 = __importDefault(require("../app/validation/createProductValidation"));
+const deleteProductValidation_1 = __importDefault(require("../app/validation/deleteProductValidation"));
+const findByIdProductValidation_1 = __importDefault(require("../app/validation/findByIdProductValidation"));
+const updateOneProductValidation_1 = __importDefault(require("../app/validation/updateOneProductValidation"));
+const updateProductValidation_1 = __importDefault(require("../app/validation/updateProductValidation"));
+const multer_1 = __importDefault(require("multer"));
+const protect = require("../app/token/auth");
+const multerConfig = (0, multer_1.default)();
+const router = (0, express_1.Router)();
+router.post('/api/v1/product', protect, createProductValidation_1.default, productController_1.default.create);
+router.post('/api/v1/product/csv', protect, multerConfig.single('file'), productController_1.default.createByCSV);
+router.get('/api/v1/product', protect, productController_1.default.findAll);
+router.get('/api/v1/product/low_stock', protect, productController_1.default.findByStock);
+router.get('/api/v1/product/:id', protect, findByIdProductValidation_1.default, productController_1.default.findById);
+router.get('/api/v1/product/marketplace/:id', protect, findByIdProductValidation_1.default, productController_1.default.findByMapper);
+router.put('/api/v1/product/:id', protect, updateProductValidation_1.default, productController_1.default.update);
+router.patch('/api/v1/product/:id', protect, updateOneProductValidation_1.default, productController_1.default.updateOne);
+router.delete('/api/v1/product/:id', protect, deleteProductValidation_1.default, productController_1.default.delete);
+exports.default = router;

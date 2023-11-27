@@ -1,5 +1,5 @@
-# *_desafioFinal-part1_*
-Primeira parte do desafio final do programa de bolsa (NodeJS)
+# *STOCK MAGANER*
+API desenvolvida em Node.js
 
 # Database
 - Cloud MongoDB (public)
